@@ -1,9 +1,12 @@
 import instance from "../../libs/script/axiosConfig";
 
-// 아이디 중복 체크
-const isIDinDB = (param) => {
-  return instance.post("/api/isIDinDB", param);
+// 교회 실실 예약
+const reserveRoomApi = (param) => {
+  return instance.post("/api/reserveRoom", param);
+};
+// 전체 예약 숫자자
+const reserveRoomCntApi = (param) => {
+  return instance.post("/api/reserveRoomCnt", param);
 };
 
-export // getUserList
- {};
+export { reserveRoomApi, reserveRoomCntApi };

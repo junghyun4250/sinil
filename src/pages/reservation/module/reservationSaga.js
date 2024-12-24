@@ -1,59 +1,33 @@
 import { call, put, takeEvery } from "@redux-saga/core/effects";
+import { reserveRoomApi, reserveRoomCntApi } from "../api/reservationApi";
 import {
-  getUserList,
-  editUser,
-  addUser,
-  removeUser,
-  getAuthList,
-  setAuth,
-  addAuth,
-  removeAuth,
-  isIDinDB,
-} from "../api/reservationApi";
-import {
-  userListSuccess,
-  userListFailure,
-  userIdDbCheckSuccess,
-  userIdDbCheckFailure,
+  reserveRoom,
+  reserveRoomSuccess,
+  reserveRoomFailure,
+  reserveRoomCnt,
+  reserveRoomCntSuccess,
+  reserveRoomCntFailure,
 } from "./reservationSlice";
-// import { openModal } from '../../../components/common/modal/module/modalSlice';
 
-// 사용자 목록 불러오기
-// function* userListAxios(action) {
-//     try {
-//         const data = yield call(getUserList, action.payload);
-//         yield put(userListSuccess(data));
-//     } catch (e) {
-//         yield put(userListFailure(e));
-//     }
-// };
-
-// 아이디 중복 체크
-// function* userAddIdDbCheckAxios(action) {
-//     try {
-//         const data = yield call(isIDinDB, action.payload);
-//         // 호출 결과를 사용하여 알림 메시지 띄우기
-//         // 추후에 openModal의 message 컴포넌트로 대체
-//         if (data.data.result === 'true') {
-//             // alert('아이디 중복');
-//             yield put(openModal({
-//                 type: 'alert_warning',
-//                 message: '이미 존재하는 아이디 입니다.'
-//             }));
-//         } else if (data.data.result === 'false') {
-//             // alert('아이디 사용 가능');
-//             yield put(openModal({
-//                 type: 'alert_complete',
-//                 message: '사용 가능한 아이디 입니다.'
-//             }));
-//         }
-//         yield put(userIdDbCheckSuccess(data));
-//     } catch (e) {
-//         yield put(userIdDbCheckFailure(e));
-//     }
-// }
+function* reservationAxios(action) {
+  try {
+    const data = yield call(reserveRoomApi, action.payload);
+    yield put(reserveRoomSuccess(data.data));
+  } catch (e) {
+    yield put(reserveRoomFailure(e));
+  }
+}
+function* reservationCntAxios(action) {
+  try {
+    const data = yield call(reserveRoomCntApi, action.payload);
+    yield put(reserveRoomCntSuccess(data.data));
+  } catch (e) {
+    yield put(reserveRoomCntFailure(e));
+  }
+}
 
 function* reservationSaga() {
-  // yield takeEvery(userList, userListAxios);
+  yield takeEvery(reserveRoom, reservationAxios);
+  yield takeEvery(reserveRoomCnt, reservationCntAxios);
 }
 export default reservationSaga;
