@@ -38,7 +38,7 @@ const RoomPick = () => {
     <>
       <div className="rooms-wrap">
         <div className="rooms-header">
-          <span>예약</span>
+          <span>신일 예약</span>
           <div className="admin">
             <button className="admin" onClick={reservedState}>
               관리자 로그인
