@@ -1,0 +1,69 @@
+{
+  "rooms": [
+    {
+      "roomName": "나눔관 1층",
+      "roomId": "a",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "나눔관 2층",
+      "roomId": "b",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "지혜실",
+      "roomId": "c",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "모세실",
+      "roomId": "d",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "살렘실",
+      "roomId": "e",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "유치부실",
+      "roomId": "f",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "지혜의 숲",
+      "roomId": "g",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "이룸",
+      "roomId": "h",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "자모실",
+      "roomId": "i",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "비전홀",
+      "roomId": "j",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "영아부실",
+      "roomId": "k",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "유년부실",
+      "roomId": "l",
+      "img": "../images/sampleImg.png"
+    },
+    {
+      "roomName": "그래이스홀",
+      "roomId": "m",
+      "img": "../images/sampleImg.png"
+    }
+  ]
+}

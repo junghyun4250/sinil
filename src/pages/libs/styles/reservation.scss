@@ -1,0 +1,36 @@
+.reserve-wrap {
+  height: 100%;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  text-align: center;
+
+  .reserve-wrap {
+    height: 200px;
+    width: 45%;
+    display: inline-block;
+    margin: 10px;
+    &:last-child {
+      display: block;
+    }
+
+    .reserve-name {
+    }
+
+    .reserve-img {
+      margin-bottom: 5px;
+      height: 80%;
+      width: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .reserve-buttons {
+      button + button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

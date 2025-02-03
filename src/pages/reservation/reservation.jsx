@@ -10,13 +10,18 @@ import {
 
 const Reservation = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { state } = useLocation(); // 2번 라인
+  const { roomData } = state;
   const isReserved = useSelector((state) => state.reservation.isReserved);
   const totalResCnt = useSelector((state) => state.reservation.totalResCnt);
 
   // 전체 예약자 수
   useEffect(() => {
     dispatch(reserveRoomCnt());
-  }, [isReserved]);
+    console.log("roomName = ", roomData.roomName);
+    console.log("roomId = ", roomData.roomId);
+  }, [isReserved, roomData]);
 
   const test = useCallback(() => {
     console.log(process.env.REACT_APP_SETUPPROXY_URL);
@@ -35,9 +40,9 @@ const Reservation = () => {
   });
   return (
     <>
-      <p>hello world</p>
-      <button onClick={test}>click!</button>
-      <p>total Count = {totalResCnt}</p>
+      <p>{roomData.roomName}</p>
+      <button onClick={() => navigate(-1)}>뒤로가기</button>
+      <p>roomId = {roomData.roomId}</p>
     </>
   );
 };
