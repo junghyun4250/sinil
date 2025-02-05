@@ -78,7 +78,9 @@ const RoomPick = () => {
             </div>
           </div>
         ))}
-        {openCalendar ? <MyCalendar setOpenCalendar={setOpenCalendar} /> : null}
+        {openCalendar ? (
+          <MyCalendar isModal={true} setOpenCalendar={setOpenCalendar} />
+        ) : null}
       </div>
     </>
   );

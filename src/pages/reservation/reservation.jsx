@@ -7,6 +7,8 @@ import {
   reserveRoom,
   reserveRoomCnt,
 } from "../reservation/module/reservationSlice";
+import MyCalendar from "../calendar/calendarModal";
+import ReservationInfo from "./reservationInfo";
 
 const Reservation = () => {
   const dispatch = useDispatch();
@@ -40,9 +42,13 @@ const Reservation = () => {
   });
   return (
     <>
-      <p>{roomData.roomName}</p>
-      <button onClick={() => navigate(-1)}>뒤로가기</button>
-      <p>roomId = {roomData.roomId}</p>
+      <div className="reservation-wrap">
+        <div className="reservation-header">
+          <span>신일 예약</span>
+        </div>
+        <MyCalendar isModal={false} />
+        <ReservationInfo />
+      </div>
     </>
   );
 };

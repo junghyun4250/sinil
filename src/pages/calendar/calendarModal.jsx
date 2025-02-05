@@ -52,7 +52,7 @@ class MyCalendar extends Component {
   };
 
   render() {
-    const { setOpenCalendar } = this.props;
+    const { isModal, setOpenCalendar } = this.props;
     const { events } = this.state;
 
     return (
@@ -67,15 +67,22 @@ class MyCalendar extends Component {
               { title: "1개의 예약", date: "2025-02-10" },
             ]}
           />
-          <button className="closeBtn" onClick={() => setOpenCalendar(false)}>
-            닫기
-          </button>
-          <button
-            className="newReservation"
-            onClick={this.handleSave} // 🔹 this.handleSave로 바인딩
-          >
-            일정 추가
-          </button>
+          {isModal ? (
+            <>
+              <button
+                className="closeBtn"
+                onClick={() => setOpenCalendar(false)}
+              >
+                닫기
+              </button>
+              <button
+                className="newReservation"
+                onClick={this.handleSave} // 🔹 this.handleSave로 바인딩
+              >
+                일정 추가
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
     );
