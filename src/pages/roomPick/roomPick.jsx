@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import uuid from "react-uuid";
+// import uuid from "react-uuid";
 import sampleimg from "../images/sampleImg.png";
 import roomsData from "../libs/script/roomData.json";
 
