@@ -1,142 +1,31 @@
-.rooms-wrap {
-  height: 100%;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
-  text-align: center;
-  position: relative; /* 부모 요소에 relative를 추가 */
+.overlay {
+  position: fixed; /* 화면 전체 덮음 */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* 회색 반투명 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998; /* 모달보다 낮고, 다른 요소보다 높은 레이어 */
+  pointer-events: auto; /* 클릭 막음 */
+}
+.calendar {
+  position: relative;
+  width: 400px; /* 모달 크기 */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 9999; /* overlay보다 위에 배치 */
 
-  .overlay {
-    position: fixed; /* 화면 전체 덮음 */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* 회색 반투명 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9998; /* 모달보다 낮고, 다른 요소보다 높은 레이어 */
-    pointer-events: auto; /* 클릭 막음 */
+  .newReservation {
+    margin-top: 10px;
+    margin-right: 10px;
+    float: right;
   }
-  .calendar {
-    position: relative;
-    width: 400px; /* 모달 크기 */
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 9999; /* overlay보다 위에 배치 */
-
-    .newReservation {
-      margin-top: 10px;
-      margin-right: 10px;
-      float: right;
-    }
-    .closeBtn {
-      margin-top: 10px;
-      float: right;
-    }
-  }
-
-  .cart-container {
-    background-color: #ffffff;
-    width: 250px;
-    height: 150px;
-    border: 1px solid #cccccc;
-    border-radius: 20px;
-    padding: 20px;
-    position: relative;
-    font-weight: 600;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    position: fixed;
-    z-index: 100;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .product-name {
-    display: inline-block;
-    font-size: 14px;
-    position: absolute;
-  }
-
-  .product-price {
-    font-size: 14px;
-    position: absolute;
-    left: 20px;
-    top: 60px;
-  }
-
-  .count {
-    width: 70px;
-    height: 20px;
-    border: 1px solid #cccccc;
-    position: relative;
-    position: absolute;
-    right: 20px;
-    top: 50px;
-    border: 1px solid #cccccc;
-    padding: 2px 0;
-  }
-
-  .minus {
-    position: absolute;
-    left: 10%;
-  }
-
-  .number {
-    position: absolute;
-    left: 45%;
-  }
-
-  .plus {
-    position: absolute;
-    right: 10%;
-  }
-
-  .total {
-    display: inline-block;
-    position: absolute;
-    left: 20px;
-    top: 100px;
-    font-size: 14px;
-  }
-
-  .total-price {
-    font-size: 15px;
-    display: inline-block;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    font-size: 22px;
-    font-weight: 600;
-  }
-
-  .cancle {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-    width: 120px;
-    padding: 7px 0;
-    background-color: white;
-    color: #0f6cfc;
-    font-weight: 600;
-    border: 1px solid #0f6cfc;
-    border-radius: 5px;
-  }
-
-  .add-cart {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    width: 120px;
-    padding: 7px 0;
-    background-color: #0f6cfc;
-    color: white;
-    font-weight: 600;
-    border: 1px solid #0f6cfc;
-    border-radius: 5px;
+  .closeBtn {
+    margin-top: 10px;
+    float: right;
   }
 }
