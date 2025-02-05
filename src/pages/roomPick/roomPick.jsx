@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 // import uuid from "react-uuid";
-import sampleimg from "../images/sampleImg.png";
+import sampleimg from "../libs/images/sampleImg.png";
 import roomsData from "../libs/script/roomData.json";
+import MyCalendar from "../calendar/calendarModal";
 
 import {
   reserveRoom,
@@ -15,6 +16,7 @@ const RoomPick = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isReserved = useSelector((state) => state.reservation.isReserved);
+  const [openCalendar, setOpenCalendar] = useState(false);
 
   const reserveFunc = useCallback((roomData) => {
     navigate("/reservation", { state: { roomData: roomData } });
@@ -45,33 +47,38 @@ const RoomPick = () => {
             </button>
           </div>
         </div>
-        <>
-          {roomsData.rooms.map((roomData) => (
-            <div className="room-wrap">
-              <div className="room-name">
-                <span>{roomData.roomName}</span>
-              </div>
-              <div className="room-img">
-                <img
-                  src={sampleimg}
-                  className="ui-li-icon"
-                  id="img1"
-                  alt="img1"
-                />
-              </div>
-              <div className="room-buttons">
-                <button
-                  onClick={() => {
-                    reserveFunc(roomData);
-                  }}
-                >
-                  예약하기
-                </button>
-                <button onClick={reservedState}>예약 현황</button>
-              </div>
+        {roomsData.rooms.map((roomData) => (
+          <div className="room-wrap">
+            <div className="room-name">
+              <span>{roomData.roomName}</span>
             </div>
-          ))}
-        </>
+            <div className="room-img">
+              <img
+                src={sampleimg}
+                className="ui-li-icon"
+                id="img1"
+                alt="img1"
+              />
+            </div>
+            <div className="room-buttons">
+              <button
+                onClick={() => {
+                  reserveFunc(roomData);
+                }}
+              >
+                예약하기
+              </button>
+              <button
+                onClick={() => {
+                  setOpenCalendar(true);
+                }}
+              >
+                예약 현황
+              </button>
+            </div>
+          </div>
+        ))}
+        {openCalendar ? <MyCalendar setOpenCalendar={setOpenCalendar} /> : null}
       </div>
     </>
   );
