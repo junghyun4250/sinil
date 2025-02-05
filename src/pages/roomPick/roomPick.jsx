@@ -6,6 +6,7 @@ import moment from "moment";
 import sampleimg from "../libs/images/sampleImg.png";
 import roomsData from "../libs/script/roomData.json";
 import MyCalendar from "../calendar/calendarModal";
+import logo from "../libs/images/logo.png";
 
 import {
   reserveRoom,
@@ -40,10 +41,10 @@ const RoomPick = () => {
     <>
       <div className="rooms-wrap">
         <div className="rooms-header">
-          <span>신일 예약</span>
+          <img src={logo} className="ui-li-logo" id="logo" alt="logo" />
           <div className="admin">
             <button className="admin" onClick={reservedState}>
-              관리자 로그인
+              관리자
             </button>
           </div>
         </div>

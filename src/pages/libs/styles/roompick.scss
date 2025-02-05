@@ -7,7 +7,10 @@
   text-align: center;
 
   .rooms-header {
-    height: 70px;
+    height: 80px;
+    img {
+      display: block;
+    }
     span {
       padding-top: 10px;
       font-size: 30px;
@@ -15,7 +18,7 @@
       display: inline-block;
     }
     .admin {
-      width: 70px;
+      width: 40px;
       font-size: 8px;
       float: right;
     }
