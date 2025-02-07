@@ -7,6 +7,7 @@ import sampleimg from "../libs/images/sampleImg.png";
 import roomsData from "../libs/script/roomData.json";
 import MyCalendar from "../calendar/calendarModal";
 import logo from "../libs/images/logo.png";
+import AdminLogin from "../common/adminLoginModal";
 
 import {
   reserveRoom,
@@ -16,40 +17,53 @@ import {
 const RoomPick = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isReserved = useSelector((state) => state.reservation.isReserved);
+  const isAdmin = useSelector((state) => state.reservation.isAdmin);
   const [openCalendar, setOpenCalendar] = useState(false);
+  const [openAdminLogin, setOpenAdminLogin] = useState(false);
+  const [roomData, setRoomData] = useState();
+  const [adminId, setAdminId] = useState();
+
+  useEffect(() => {
+    if (isAdmin !== undefined) {
+      localStorage.setItem("idx", isAdmin.idx);
+      localStorage.setItem("id", isAdmin.id);
+      setAdminId(isAdmin.id);
+    }
+  }, [isAdmin]);
+
+  const showId = useCallback(() => {
+    return <span className="admin-id">관리자: {adminId}</span>;
+  }, [adminId]);
 
   const reserveFunc = useCallback((roomData) => {
     navigate("/reservation", { state: { roomData: roomData } });
   });
-  const reservedState = useCallback(() => {
-    console.log(process.env.REACT_APP_SETUPPROXY_URL);
-    const date = new Date();
-    const formattedDate = moment(date).format("YYYY-MM-DD");
-    const formattedTime = moment(date).format("hh:mm");
-    const param = {
-      resPerson: "황정현",
-      resContact: "010-1234-1234",
-      resDate: formattedDate,
-      pasture: "2목장",
-      resTime: formattedTime,
-      roomName: "나눔관",
-    };
-    dispatch(reserveRoom(param));
-  });
+
   return (
     <>
       <div className="rooms-wrap">
         <div className="rooms-header">
           <img src={logo} className="ui-li-logo" id="logo" alt="logo" />
           <div className="admin">
-            <button className="admin" onClick={reservedState}>
-              관리자
-            </button>
+            {adminId ? (
+              <span className="admin-id">
+                관리자: {localStorage.getItem("id")}
+              </span>
+            ) : (
+              // showId()
+              <button
+                className="admin-button"
+                onClick={() => {
+                  setOpenAdminLogin(true);
+                }}
+              >
+                관리자
+              </button>
+            )}
           </div>
         </div>
-        {roomsData.rooms.map((roomData) => (
-          <div className="room-wrap">
+        {roomsData.rooms.map((roomData, index) => (
+          <div className="room-wrap" key={index}>
             <div className="room-name">
               <span>{roomData.roomName}</span>
             </div>
@@ -72,6 +86,7 @@ const RoomPick = () => {
               <button
                 onClick={() => {
                   setOpenCalendar(true);
+                  setRoomData(roomData);
                 }}
               >
                 예약 현황
@@ -80,7 +95,14 @@ const RoomPick = () => {
           </div>
         ))}
         {openCalendar ? (
-          <MyCalendar isModal={true} setOpenCalendar={setOpenCalendar} />
+          <MyCalendar
+            isModal={true}
+            setOpenCalendar={setOpenCalendar}
+            roomData={roomData}
+          />
+        ) : null}
+        {openAdminLogin ? (
+          <AdminLogin setOpenAdminLogin={setOpenAdminLogin} />
         ) : null}
       </div>
     </>

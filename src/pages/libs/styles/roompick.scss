@@ -1,9 +1,9 @@
 .rooms-wrap {
   height: 100%;
-  width: 400px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   text-align: center;
   background: rgb(255, 197, 150);
 
@@ -19,9 +19,17 @@
       display: inline-block;
     }
     .admin {
-      width: 40px;
+      // width: 40px;
       font-size: 8px;
       float: right;
+      margin-right: 20px;
+      .admin-id {
+        font-size: 12px;
+        padding-top: 0px;
+      }
+      .admin-button {
+        font-size: 8px;
+      }
     }
     .admin:hover {
       background-color: #aaaaaa;
@@ -31,7 +39,7 @@
 
   .room-wrap {
     height: 200px;
-    width: 45%;
+    width: 44%;
     display: inline-block;
     margin: 10px;
     &:last-child {
