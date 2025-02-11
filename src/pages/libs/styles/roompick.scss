@@ -5,49 +5,83 @@
   margin-right: auto;
   padding-bottom: 50px;
   text-align: center;
-  background: rgb(255, 197, 150);
+  background: linear-gradient(
+    135deg,
+    #ff9a9e 0%,
+    #fad0c4 100%
+  ); /* Gradient background */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  overflow: hidden; /* Ensures child elements respect border-radius */
 
   .rooms-header {
     height: 80px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+
     img {
       display: block;
+      margin: 0 auto 10px;
     }
+
     span {
       padding-top: 10px;
       font-size: 30px;
-      width: 100%;
+      font-weight: bold;
+      color: #ffffff; /* White text */
       display: inline-block;
     }
+
     .admin {
       font-size: 8px;
       float: right;
       margin-right: 20px;
+      color: #ffffff;
+
       .admin-id {
         font-size: 12px;
         padding-top: 0px;
       }
+
       .admin-button {
         font-size: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        color: #ffffff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.4);
+        }
       }
-    }
-    .admin:hover {
-      background-color: #aaaaaa;
-      color: #ffffff;
     }
   }
 
   .room-wrap {
-    height: auto; /* 높이를 자동으로 조정 */
-    width: 46%;
+    height: auto;
+    width: 45%;
     display: inline-block;
     margin: 5px;
-    background: #ffffff; /* 그룹 목록 배경색 추가 */
-    border-radius: 8px; /* 둥근 모서리 추가 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-    &:last-child {
-      display: block;
-      margin-left: 10px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px); /* Lift effect on hover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
+
+    // &:last-child {
+    //   display: block;
+    //   margin-left: 10px;
+    // }
+
     &.large {
       display: block;
       width: 94%;
@@ -55,88 +89,116 @@
     }
 
     .room-name {
-      padding: 10px;
-      font-size: 18px;
+      padding: 15px;
+      font-size: 17px;
       font-weight: bold;
+      color: #333333; /* Dark text */
     }
 
     .room-img {
       margin-bottom: 5px;
-      height: 150px; /* 이미지 높이 고정 */
+      height: 150px;
       width: 100%;
+      overflow: hidden; /* Ensures image respects border-radius */
+
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* 이미지 비율 유지 */
-        border-radius: 8px 8px 0 0; /* 상단 모서리만 둥글게 */
+        object-fit: cover;
+        border-radius: 12px 12px 0 0;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1); /* Zoom effect on hover */
+        }
       }
     }
 
     .room-buttons {
-      padding: 10px;
+      padding: 15px;
+
       button {
-        padding: 8px 16px;
+        padding: 10px 20px;
         font-size: 14px;
         border: none;
-        border-radius: 4px;
-        background-color: #f0f0f0;
+        border-radius: 8px;
+        background-color: #ff6f61; /* Coral color */
+        color: #ffffff;
         cursor: pointer;
+        transition: background 0.3s ease;
+
         &:hover {
-          background-color: #aaaaaa;
-          color: #ffffff;
+          background-color: #ff3b2f; /* Darker coral on hover */
         }
       }
+
       button + button {
-        margin-top: 5px;
+        margin-top: 10px;
       }
     }
 
     .groups-show {
-      padding: 10px;
+      padding: 15px;
+
       button {
         width: 100%;
-        padding: 8px 16px;
+        padding: 10px 20px;
         font-size: 14px;
         border: none;
-        border-radius: 4px;
-        background-color: #f0f0f0;
+        border-radius: 8px;
+        background-color: #ff6f61; /* Coral color */
+        color: #ffffff;
         cursor: pointer;
+        transition: background 0.3s ease;
+
         &:hover {
-          background-color: #aaaaaa;
-          color: #ffffff;
+          background-color: #ff3b2f; /* Darker coral on hover */
         }
       }
     }
 
     .groups-list {
-      padding: 10px;
-      background: #f9f9f9; /* 그룹 목록 배경색 */
-      border-radius: 0 0 8px 8px; /* 하단 모서리만 둥글게 */
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      border-radius: 0 0 12px 12px;
+
       .group-item {
         margin-bottom: 10px;
-        padding: 10px;
+        padding: 15px;
         background: #ffffff;
-        border-radius: 4px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그룹 아이템 그림자 */
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-3px); /* Lift effect on hover */
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .group-name {
           font-size: 16px;
           font-weight: bold;
           margin-bottom: 10px;
+          color: #333333; /* Dark text */
         }
+
         .group-buttons {
           display: flex;
           justify-content: center;
-          gap: 10px; /* 버튼 간격 조정 */
+          gap: 10px;
+
           button {
             padding: 8px 16px;
             font-size: 14px;
             border: none;
-            border-radius: 4px;
-            background-color: #f0f0f0;
+            border-radius: 8px;
+            background-color: #ff6f61; /* Coral color */
+            color: #ffffff;
             cursor: pointer;
+            transition: background 0.3s ease;
+
             &:hover {
-              background-color: #aaaaaa;
-              color: #ffffff;
+              background-color: #ff3b2f; /* Darker coral on hover */
             }
           }
         }

@@ -1,60 +1,183 @@
 .rooms-wrap {
   .overlay {
-    position: fixed; /* 화면 전체 덮음 */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* 회색 반투명 */
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9998; /* 모달보다 낮고, 다른 요소보다 높은 레이어 */
-    pointer-events: auto; /* 클릭 막음 */
+    z-index: 9998;
+    pointer-events: auto;
   }
   .calendar {
     position: relative;
-    width: 400px; /* 모달 크기 */
-    background: rgb(255, 255, 255);
+    width: 400px;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    z-index: 9999; /* overlay보다 위에 배치 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
 
     .newReservation {
       margin-top: 10px;
       margin-right: 10px;
       float: right;
+      background-color: #4caf50; /* Green */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #45a049;
+      }
     }
     .closeBtn {
       margin-top: 20px;
       float: right;
+      background-color: #f44336; /* Red */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: #d32f2f;
+      }
     }
   }
 
   .login-wrap {
-    width: 300px;
-    height: 150px;
-    background-color: #ffffff;
-    border: solid 1px #414141;
+    width: 320px;
+    height: 190px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
     border-radius: 15px;
-    .login-header {
-      margin: 5px 0;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 로그인 헤더 */
+  .login-header {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* 로그인 입력 필드 */
+  .input-login {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-login input {
+    width: 100%;
+    max-width: 280px; /* ✅ 부모 크기를 초과하지 않도록 조정 */
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    font-size: 14px;
+  }
+
+  .input-login input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  /* 로그인 버튼 */
+  .login-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .login-button button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* ✅ 가독성 향상 */
+  }
+
+  /* 로그인 버튼 - 기본 */
+  .login-button .login {
+    background-color: #0056b3; /* ✅ 더 어두운 블루로 조정 */
+  }
+
+  .login-button .login:hover {
+    background-color: #004494;
+  }
+
+  /* 취소 버튼 */
+  .login-button .cancel {
+    background-color: #5a6268; /* ✅ 더 어두운 회색으로 조정 */
+  }
+
+  .login-button .cancel:hover {
+    background-color: #484e54;
+  }
+
+  /* 버튼 클릭 시 약간 눌리는 효과 */
+  .login-button button:active {
+    transform: scale(0.95);
+  }
+
+  /* 반응형 디자인 (모바일 최적화) */
+  @media (max-width: 480px) {
+    .login-wrap {
+      width: 90%;
     }
-    .input-login {
-      margin: 10px 0;
+
+    .input-login input {
+      width: 100%;
+      max-width: none;
     }
+
     .login-button {
-      button + button {
-        margin-left: 10px;
-      }
+      flex-direction: column;
+    }
+
+    .login-button button {
+      width: 100%;
     }
   }
 }
 .fc .fc-button-primary {
   font-size: 0.8em;
+  background-color: #4caf50; /* Green */
+  border: none;
+  &:hover {
+    background-color: #45a049;
+  }
 }
 .fc .fc-button-group {
   margin-left: 5px !important;
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: 14px;
 }
 .reservation-wrap {
   height: 100%;
@@ -63,17 +186,14 @@
   margin-right: auto;
   margin-bottom: 50px;
   text-align: center;
-  position: relative; /* 부모 요소에 relative를 추가 */
+  position: relative;
 
   .calendar {
     position: relative;
     width: 100%;
     height: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 1);
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 9999;
   }
 }
@@ -83,6 +203,10 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .modal + .modal {
   margin-top: 5px;
@@ -90,20 +214,32 @@
 
 .modal p {
   margin: 0;
-  white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 */
+  white-space: nowrap;
   font-size: 12px;
+  color: #333;
 }
 
 .modal button {
-  margin-left: 10px; /* 버튼과 텍스트 사이의 간격 */
+  margin-left: 10px;
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #d32f2f;
+  }
 }
 
 .reserved-history {
   background-color: #d0f4ff;
   padding: 5px 0;
   text-align: start;
+  border-radius: 5px;
   p {
     margin: 5px 0;
     font-size: 10px;
+    color: #333;
   }
 }

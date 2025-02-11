@@ -1,126 +1,185 @@
 .reservation-wrap {
   height: 100%;
   max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
+  margin: 0 auto 50px auto;
   text-align: center;
-  background: rgb(208, 244, 255);
-  .reservation-header {
-    padding: 10px 0px;
-    font-size: 20px;
-    font-weight: 600;
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 헤더 스타일 */
+.reservation-header {
+  padding: 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 예약 정보 컨테이너 */
+.reservation-Info-wrap {
+  padding: 0 20px;
+}
+
+/* 예약 정보 헤더 */
+.reservation-Info-header {
+  border-top: solid 1px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+  padding: 15px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 폼 전체 영역 */
+form {
+  padding-bottom: 20px;
+}
+
+/* 예약 정보 본문 */
+.reservation-info-body {
+  text-align: initial;
+}
+
+/* 공통 입력 필드 스타일 */
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* 라벨 스타일 */
+.info span {
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1px;
+  min-width: 60px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* 시간 선택 컨테이너 */
+.time-select {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* 드롭다운 선택 스타일 */
+.input-info-time,
+.input-info {
+  flex: 1;
+  min-width: 100px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  font-size: 14px;
+}
+
+.input-info-time:focus,
+.input-info:focus {
+  border-color: #007bff;
+}
+
+/* 시간 선택 드롭다운 */
+.input-info-time {
+  text-align: center;
+}
+
+/* 텍스트 입력 필드 */
+.input-info-area {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.input-info-area:focus {
+  border-color: #007bff;
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+/* 버튼 스타일 */
+.submit-button,
+.cancel-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button {
+  background-color: #007bff;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+/* 반응형 디자인 (모바일 최적화) */
+@media (max-width: 480px) {
+  .reservation-wrap {
+    max-width: 90%;
   }
-  .reservation-Info-wrap {
-    padding: 0 10px;
-    height: 100%;
-    .reservation-Info-header {
-      border-top: solid 1px #000000;
-      border-bottom: solid 1px #000000;
-      padding: 5px 0px;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    form {
-      padding-bottom: 10px;
-    }
-    .reservation-info-body {
-      text-align: initial;
-      .info {
-        font-size: 14px;
-        display: flex;
-        align-items: flex-start; /* 상단 정렬 */
-        gap: 10px; /* 요소 간 간격 */
-        position: relative;
-        margin-top: 10px;
-        span {
-          position: absolute;
-          top: 0;
-          left: 0;
-          font-weight: bold; /* 강조 효과 */
-          letter-spacing: 20px;
-        }
-      }
-      .time-select {
-        span {
-          position: initial;
-          width: 50px; /* 라벨 너비 */
-          text-align: right;
-          letter-spacing: 10px;
-        }
-        .input-info-time {
-          margin-left: 5px; /* "부서" 텍스트와 간격 조정 */
-          width: 100%;
-          height: 30px;
-          resize: none; /* 사용자가 크기 조절하지 못하게 설정 */
-        }
-      }
 
-      .input-info {
-        width: 150px;
-        padding: 5px;
-      }
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-      // .info span {
-      //   position: absolute;
-      //   top: 0;
-      //   left: 0;
-      //   font-weight: bold; /* 강조 효과 */
-      //   letter-spacing: 20px;
-      // }
+  .info span {
+    text-align: left;
+    min-width: auto;
+  }
 
-      .input-info {
-        margin-left: 90px; /* "부서" 텍스트와 간격 조정 */
-        width: 100%;
-        resize: none; /* 사용자가 크기 조절하지 못하게 설정 */
-      }
-      .input-info-area {
-        margin-left: 90px; /* "부서" 텍스트와 간격 조정 */
-        min-width: 250px;
-        min-height: 80px;
-        resize: none; /* 사용자가 크기 조절하지 못하게 설정 */
-      }
-    }
-    .button-container {
-      display: inline-flex;
-      justify-content: flex-end; /* 버튼을 오른쪽 정렬 */
-      gap: 10px; /* 버튼 사이 간격 */
-      padding-top: 10px;
-      height: 100%;
-    }
+  .time-select {
+    flex-direction: column;
+    gap: 5px;
+  }
 
-    .submit-button {
-      display: block;
-      margin-left: auto;
-      margin-right: 5px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+  .input-info-time,
+  .input-info {
+    width: 100%; /* ✅ 모바일에서는 드롭다운 너비를 100%로 설정 */
+  }
 
-    .submit-button:hover {
-      background-color: #0056b3;
-    }
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .cancel-button {
-      display: block;
-      margin-left: auto;
-      margin-right: 5px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding: 10px 20px;
-      background-color: #ccc;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .cancel-button:hover {
-      background-color: #999;
-    }
+  .submit-button,
+  .cancel-button {
+    width: 100%;
   }
 }
