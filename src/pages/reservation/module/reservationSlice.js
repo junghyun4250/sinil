@@ -4,7 +4,7 @@ const initialState = {
   isReserved: 0,
   totalResCnt: 0,
   monthData: [],
-  calendarReload: 0,
+  calendarReload: false,
   isAdmin: {
     idx: "",
     id: "",
@@ -12,12 +12,15 @@ const initialState = {
 };
 
 const reducers = {
+  resetCalendarReload: (state, action) => {
+    state.calendarReload = false;
+  },
   reserveRoom: (state, action) => {
     state.isLoading = true;
   },
   reserveRoomSuccess: (state, action) => {
     console.log("예약 성공");
-    state.calendarReload += 1;
+    state.calendarReload = true;
   },
   reserveRoomFailure: (state, action) => {
     console.log("예약 실패");
@@ -44,12 +47,15 @@ const reducers = {
   getMonthDataFailure: (state, action) => {
     state.isLoading = false;
   },
+  resetMonthData: (state, action) => {
+    state.monthData = [];
+  },
   cancelReservation: (state, action) => {
     state.isLoading = true;
   },
   cancelReservationSuccess: (state, action) => {
     console.log("예약 취소 성공");
-    if (action.payload) state.calendarReload += 1;
+    if (action.payload) state.calendarReload = true;
   },
   cancelReservationFailure: (state, action) => {
     console.log("예약 취소 성공");
@@ -74,6 +80,7 @@ export const reservationSlice = createSlice({
 });
 
 export const {
+  resetCalendarReload,
   reserveRoom,
   reserveRoomSuccess,
   reserveRoomFailure,
@@ -83,6 +90,7 @@ export const {
   getMonthData,
   getMonthDataSuccess,
   getMonthDataFailure,
+  resetMonthData,
   cancelReservation,
   cancelReservationSuccess,
   cancelReservationFailure,

@@ -3,12 +3,181 @@
     {
       "roomName": "나눔관 1층",
       "roomId": "a",
-      "img": "../libs/images/sampleImg.png"
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "a-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "a-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "a-3",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "4.모임",
+          "roomId": "a-4",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "5.모임",
+          "roomId": "a-5",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
     },
     {
       "roomName": "나눔관 2층",
       "roomId": "b",
-      "img": "../libs/images/sampleImg.png"
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "b-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "b-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "b-3",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "4.모임",
+          "roomId": "b-4",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "5.모임",
+          "roomId": "b-5",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "유치부실",
+      "roomId": "f",
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "f-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "f-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "f-3",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "그레이스홀",
+      "roomId": "m",
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "m-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "m-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "m-3",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "비전홀",
+      "roomId": "j",
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "j-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "j-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "j-3",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "4.모임",
+          "roomId": "j-4",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "영아부실",
+      "roomId": "k",
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "k-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "k-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "k-3",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "유년부실",
+      "roomId": "l",
+      "img": "../libs/images/sampleImg.png",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "l-1",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "l-2",
+          "img": "../libs/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "l-3",
+          "img": "../libs/images/sampleImg.png"
+        }
+      ]
     },
     {
       "roomName": "지혜실",
@@ -25,11 +194,7 @@
       "roomId": "e",
       "img": "../libs/images/sampleImg.png"
     },
-    {
-      "roomName": "유치부실",
-      "roomId": "f",
-      "img": "../libs/images/sampleImg.png"
-    },
+
     {
       "roomName": "지혜의 숲",
       "roomId": "g",
@@ -46,23 +211,18 @@
       "img": "../libs/images/sampleImg.png"
     },
     {
-      "roomName": "비전홀",
-      "roomId": "j",
+      "roomName": "은샘실",
+      "roomId": "n",
       "img": "../libs/images/sampleImg.png"
     },
     {
-      "roomName": "영아부실",
-      "roomId": "k",
+      "roomName": "사랑실",
+      "roomId": "o",
       "img": "../libs/images/sampleImg.png"
     },
     {
-      "roomName": "유년부실",
-      "roomId": "l",
-      "img": "../libs/images/sampleImg.png"
-    },
-    {
-      "roomName": "그래이스홀",
-      "roomId": "m",
+      "roomName": "새가족환영실",
+      "roomId": "p",
       "img": "../libs/images/sampleImg.png"
     }
   ]

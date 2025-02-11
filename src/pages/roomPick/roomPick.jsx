@@ -9,10 +9,7 @@ import MyCalendar from "../calendar/calendarModal";
 import logo from "../libs/images/logo.png";
 import AdminLogin from "../common/adminLoginModal";
 
-import {
-  reserveRoom,
-  reserveRoomCnt,
-} from "../reservation/module/reservationSlice";
+import { resetMonthData } from "../reservation/module/reservationSlice";
 
 const RoomPick = () => {
   const dispatch = useDispatch();
@@ -20,8 +17,10 @@ const RoomPick = () => {
   const isAdmin = useSelector((state) => state.reservation.isAdmin);
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openAdminLogin, setOpenAdminLogin] = useState(false);
+  const [showGroups, setShowGroups] = useState(false);
   const [roomData, setRoomData] = useState();
   const [adminId, setAdminId] = useState();
+  const [selectedRoomIndex, setSelectedRoomIndex] = useState(null);
 
   useEffect(() => {
     if (isAdmin !== undefined) {
@@ -38,6 +37,10 @@ const RoomPick = () => {
   const reserveFunc = useCallback((roomData) => {
     navigate("/reservation", { state: { roomData: roomData } });
   });
+
+  const toggleGroups = (index) => {
+    setSelectedRoomIndex(selectedRoomIndex === index ? null : index);
+  };
 
   return (
     <>
@@ -63,7 +66,10 @@ const RoomPick = () => {
           </div>
         </div>
         {roomsData.rooms.map((roomData, index) => (
-          <div className="room-wrap" key={index}>
+          <div
+            className={`room-wrap ${roomData.groups ? "large" : ""}`}
+            key={index}
+          >
             <div className="room-name">
               <span>{roomData.roomName}</span>
             </div>
@@ -75,23 +81,67 @@ const RoomPick = () => {
                 alt="img1"
               />
             </div>
-            <div className="room-buttons">
-              <button
-                onClick={() => {
-                  reserveFunc(roomData);
-                }}
-              >
-                예약하기
-              </button>
-              <button
-                onClick={() => {
-                  setOpenCalendar(true);
-                  setRoomData(roomData);
-                }}
-              >
-                예약 현황
-              </button>
-            </div>
+            {roomData.groups ? (
+              <>
+                <div className="groups-show">
+                  <button
+                    onClick={() => {
+                      toggleGroups(index);
+                    }}
+                  >
+                    {selectedRoomIndex === index ? "접기" : "펼치기"}
+                  </button>
+                </div>
+                {selectedRoomIndex === index && (
+                  <div className="groups-list">
+                    {roomData.groups.map((group, groupIndex) => (
+                      <div className="group-item" key={groupIndex}>
+                        <div className="group-name">
+                          <span>{group.roomName}</span>
+                        </div>
+                        <div className="group-buttons">
+                          <button
+                            onClick={() => {
+                              reserveFunc(group);
+                            }}
+                          >
+                            예약하기
+                          </button>
+                          <button
+                            onClick={() => {
+                              dispatch(resetMonthData());
+                              setOpenCalendar(true);
+                              setRoomData(group);
+                            }}
+                          >
+                            예약현황
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="room-buttons">
+                <button
+                  onClick={() => {
+                    reserveFunc(roomData);
+                  }}
+                >
+                  예약하기
+                </button>
+                <button
+                  onClick={() => {
+                    dispatch(resetMonthData());
+                    setOpenCalendar(true);
+                    setRoomData(roomData);
+                  }}
+                >
+                  예약현황
+                </button>
+              </div>
+            )}
           </div>
         ))}
         {openCalendar ? (

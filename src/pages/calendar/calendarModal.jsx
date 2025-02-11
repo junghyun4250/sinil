@@ -5,6 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import ReservationCancelModal from "../common/reservationCancelModal";
 import {
+  resetCalendarReload,
   getMonthData,
   cancelReservation,
 } from "../reservation/module/reservationSlice";
@@ -32,73 +33,87 @@ const MyCalendar = ({
     (state) => state.reservation.calendarReload
   );
 
+  // 캘린더 데이터를 불러오는 함수
+  const callMonthData = useCallback(
+    (param) => {
+      console.log("param: ", param);
+      dispatch(getMonthData(param));
+    },
+    [dispatch]
+  );
+
+  // 캘린더가 로드되거나 월/년이 변경될 때 데이터 호출
   useEffect(() => {
-    const param = { currentYear, currentMonth, roomCode: roomData.roomId };
-    callMonthData(param);
+    if (roomData?.roomId && currentYear && currentMonth) {
+      const param = { currentYear, currentMonth, roomCode: roomData.roomId };
+      callMonthData(param);
+    }
+  }, [currentYear, currentMonth, roomData, callMonthData]);
+
+  // 캘린더 Reload 시 데이터 호출
+  useEffect(() => {
+    if (calendarReload) {
+      const param = { currentYear, currentMonth, roomCode: roomData.roomId };
+      dispatch(resetCalendarReload());
+      callMonthData(param);
+    }
   }, [calendarReload]);
 
+  // 캘린더 날짜 변경 시 현재 년/월 업데이트
+  const handleDatesSet = useCallback((arg) => {
+    const currentDate = arg.view.currentStart;
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    setCurrentYear(`${year}`);
+    setCurrentMonth(`${month}`);
+    setShowModal(false);
+  }, []);
+
+  // 이벤트 클릭 시 모달 표시
   const handleEventClick = useCallback((info) => {
     setModalSelectedDate(info.event.startStr);
     setSelectedEvent(info.event);
     setShowModal(true);
   }, []);
 
-  const handleCancelClick = () => {
+  // 날짜 클릭 시 선택한 날짜 업데이트
+  const handleDateClick = useCallback(
+    (info) => {
+      setSelectedDate(info.dateStr); // 선택한 날짜 업데이트
+      console.log("선택한 날짜:", info.dateStr);
+
+      // 선택한 날짜를 events 상태에 추가
+      setEvents((prevEvents) => [
+        ...prevEvents.filter((e) => e.className !== "selected-date"), // 기존 선택 날짜 제거
+        {
+          title: "",
+          start: info.dateStr,
+          allDay: true,
+          display: "background", // ✅ 배경색만 표시
+          backgroundColor: "#3d77ff", // ✅ 선택한 날짜 색상 (주황색 계열)
+          className: "selected-date", // ✅ 선택한 날짜임을 구분하기 위한 클래스
+        },
+      ]);
+    },
+    [setSelectedDate]
+  );
+
+  // 예약 취소 모달 열기
+  const handleCancelClick = useCallback(() => {
     setShowCancelModal(true);
-  };
+  }, []);
 
-  const handleCancelSubmit = (reservationInfo) => {
-    console.log("예약자 정보:", reservationInfo);
-    dispatch(cancelReservation(reservationInfo));
-    setShowCancelModal(false);
-  };
+  // 예약 취소 제출
+  const handleCancelSubmit = useCallback(
+    (reservationInfo) => {
+      console.log("예약자 정보:", reservationInfo);
+      dispatch(cancelReservation(reservationInfo));
+      setShowCancelModal(false);
+    },
+    [dispatch]
+  );
 
-  const handleDatesSet = (arg) => {
-    const currentDate = arg.view.currentStart;
-    const month = currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-    const currentYear = `${year}`;
-    const currentMonth = `${month}`;
-    setShowModal(false);
-    setCurrentYear(currentYear);
-    setCurrentMonth(currentMonth);
-
-    const param = { currentYear, currentMonth, roomCode: roomData.roomId };
-    callMonthData(param);
-  };
-
-  const handleDateClick = (info) => {
-    setSelectedDate(info.dateStr); // 선택한 날짜 업데이트
-    console.log("선택한 날짜:", info.dateStr);
-
-    // 선택한 날짜를 events 상태에 추가
-    setEvents((prevEvents) => [
-      ...prevEvents.filter((e) => e.className !== "selected-date"), // 기존 선택 날짜 제거
-      {
-        title: "",
-        start: info.dateStr,
-        allDay: true,
-        display: "background", // ✅ 배경색만 표시
-        backgroundColor: "#3d77ff", // ✅ 선택한 날짜 색상 (주황색 계열)
-        className: "selected-date", // ✅ 선택한 날짜임을 구분하기 위한 클래스
-      },
-    ]);
-  };
-
-  const callMonthData = (param) => {
-    console.log("param: ", param);
-    dispatch(getMonthData(param));
-  };
-
-  useEffect(() => {
-    if (currentYear && currentMonth) {
-      console.log("현재 년:", currentYear);
-      console.log("현재 월:", currentMonth);
-      const param = { currentYear, currentMonth, roomCode: roomData.roomId };
-      callMonthData(param);
-    }
-  }, [currentMonth]);
-
+  // monthData가 변경될 때 events 업데이트
   useEffect(() => {
     if (monthData.length > 0) {
       console.log("monthData = ", monthData);
@@ -128,13 +143,23 @@ const MyCalendar = ({
     }
   }, [monthData]);
 
+  // 선택한 날짜의 예약 내역 표시
   const showTimeline = useCallback(() => {
     return monthData
-      .filter((data) => data.date === selectedDate) // 🔹 선택한 날짜와 같은 데이터만 필터링
+      .filter((data) => data.date === selectedDate) // 🔹 Filter data for the selected date
       .map((data, index) => (
-        <p key={index}>
-          예약 내역: {data.startTime} ~ {data.endTime} ({data.mokjang})
-        </p>
+        <div key={data.id || index}>
+          {" "}
+          {/* Use a unique ID from data if available, otherwise fallback to index */}
+          <p>
+            예약 내역: {data.startTime} ~ {data.endTime} ({data.mokjang})
+          </p>
+          {localStorage.getItem("id") && (
+            <p>
+              상세 내역: {data.department} {data.name} {data.contactNum}
+            </p>
+          )}
+        </div>
       ));
   }, [selectedDate, monthData]); // 🔹 selectedDate가 변경될 때만 실행
 
@@ -144,6 +169,7 @@ const MyCalendar = ({
         <FullCalendar
           ref={calendarRef}
           defaultView="dayGridMonth"
+          locale="ko"
           plugins={[dayGridPlugin, interactionPlugin]}
           events={events}
           eventClick={isModal && handleEventClick}
@@ -158,6 +184,7 @@ const MyCalendar = ({
         >
           {!isModal && selectedDate && showTimeline()}
         </div>
+
         {/* 🔹 이벤트 상세 모달 */}
         {showModal &&
           isModal &&
