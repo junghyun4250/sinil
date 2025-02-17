@@ -22,8 +22,21 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  // 개인정보 동의 체크박스 상태
+  const [isAgreed, setIsAgreed] = useState(false);
+  const [isErrorAgreed, setIsErrorAgreed] = useState(false);
+  const agreeRef = useRef(null);
+
   const contactRef = useRef(null);
   const numCntRef = useRef(null);
+
+  // 현재 시간 가져오기
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+  const currentTime = `${currentHour
+    .toString()
+    .padStart(2, "0")}:${currentMinute.toString().padStart(2, "0")}`;
 
   // 예약 가능한 시간 리스트 (06:00 ~ 23:00)
   const availableTimes = Array.from({ length: 18 }, (_, i) => {
@@ -31,9 +44,17 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
     return `${hour.toString().padStart(2, "0")}:00`;
   });
 
+  // 오늘 날짜인지 확인
+  const isToday = selectedDate === now.toISOString().split("T")[0];
+
+  // 오늘 날짜일 경우 현재 시간 이후의 시간만 필터링
+  const filteredAvailableTimes = isToday
+    ? availableTimes.filter((time) => time >= currentTime)
+    : availableTimes;
+
   // 종료시간 선택 옵션 (시작시간 이후만 선택 가능)
   const filteredEndTimes = startTime
-    ? availableTimes.filter((time) => time > startTime)
+    ? filteredAvailableTimes.filter((time) => time > startTime)
     : [];
 
   const handleChangeContact = (e) => {
@@ -65,6 +86,12 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
       return;
     }
 
+    if (!isAgreed) {
+      setIsErrorAgreed(true);
+      agreeRef.current.focus();
+      return;
+    }
+
     const formData = {
       roomCode: roomData.roomId,
       date: selectedDate,
@@ -92,6 +119,7 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
     setDepartment("");
     setStartTime("");
     setEndTime("");
+    setIsAgreed(false);
   };
 
   const handleCancel = () => {
@@ -104,6 +132,7 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
     setDepartment("");
     setStartTime("");
     setEndTime("");
+    setIsAgreed(false);
     navigate(-1);
   };
 
@@ -124,7 +153,7 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
                   onChange={(e) => setStartTime(e.target.value)}
                 >
                   <option value="">-- 선택하세요 --</option>
-                  {availableTimes.map((time) => (
+                  {filteredAvailableTimes.map((time) => (
                     <option key={time} value={time}>
                       {time}
                     </option>
@@ -228,18 +257,45 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
                   onChange={(e) => setDepartment(e.target.value)}
                 />
               </div>
+              {/* 개인정보 수집 동의 체크박스 */}
+              <div className="info">
+                <input
+                  type="checkbox"
+                  id="agree"
+                  ref={agreeRef}
+                  checked={isAgreed}
+                  onChange={() => {
+                    setIsAgreed(!isAgreed);
+                    setIsErrorAgreed(false);
+                  }}
+                  style={{
+                    transform: "scale(1.2)",
+                    marginRight: "8px",
+                    accentColor: isErrorAgreed ? "red" : "",
+                  }}
+                />
+                <label
+                  htmlFor="agree"
+                  style={{
+                    color: isErrorAgreed ? "red" : "",
+                    fontWeight: isErrorAgreed ? "bold" : "normal",
+                  }}
+                >
+                  개인정보 수집에 동의하십니까?
+                </label>
+              </div>
             </div>
 
             <div className="button-container">
+              <button type="submit" className="submit-button">
+                예약하기
+              </button>
               <button
                 type="button"
                 className="cancel-button"
                 onClick={handleCancel}
               >
                 취소
-              </button>
-              <button type="submit" className="submit-button">
-                예약하기
               </button>
             </div>
           </form>

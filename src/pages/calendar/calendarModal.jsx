@@ -79,6 +79,16 @@ const MyCalendar = ({
   // 날짜 클릭 시 선택한 날짜 업데이트
   const handleDateClick = useCallback(
     (info) => {
+      const selectedDate = new Date(info.dateStr);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // 오늘 날짜의 시간을 00:00:00으로 설정
+
+      // 선택한 날짜가 오늘보다 이전인지 확인
+      if (selectedDate < today) {
+        alert("예약불가능 합니다. 오늘 이후의 날짜를 선택해주세요.");
+        return; // 함수 종료
+      }
+
       setSelectedDate(info.dateStr); // 선택한 날짜 업데이트
       console.log("선택한 날짜:", info.dateStr);
 

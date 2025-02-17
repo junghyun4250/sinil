@@ -20,7 +20,7 @@ const Reservation = () => {
     <>
       <div className="reservation-wrap">
         <div className="reservation-header">
-          <span>신일 예약</span>
+          <span>시간 예약</span>
         </div>
         <MyCalendar
           isModal={false}
