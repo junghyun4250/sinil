@@ -3,30 +3,30 @@
     {
       "roomName": "나눔관 1층",
       "roomId": "a",
-      "img": "/images/nanum1stA.jpg",
+      "img": "/images/나눔관 1층.png",
       "groups": [
         {
-          "roomName": "1.모임",
+          "roomName": "나눔홀1",
           "roomId": "a-1",
           "img": "/images/나눔관 1층 A.jpg"
         },
         {
-          "roomName": "2.모임",
+          "roomName": "나눔홀2",
           "roomId": "a-2",
           "img": "/images/나눔관 1층 B,C.jpg"
         },
         {
-          "roomName": "3.모임",
+          "roomName": "나눔홀3",
           "roomId": "a-3",
           "img": "/images/나눔관 1층 B,C.jpg"
         },
         {
-          "roomName": "4.모임",
+          "roomName": "나눔룸1",
           "roomId": "a-4",
           "img": "/images/나눔관 1층 D,E.jpg"
         },
         {
-          "roomName": "5.모임",
+          "roomName": "나눔룸2",
           "roomId": "a-5",
           "img": "/images/나눔관 1층 D,E.jpg"
         }
@@ -35,83 +35,39 @@
     {
       "roomName": "나눔관 2층",
       "roomId": "b",
-      "img": "/images/sampleImg.png",
+      "img": "/images/나눔관 2층.png",
       "groups": [
         {
-          "roomName": "1.모임",
+          "roomName": "나눔 거실",
           "roomId": "b-1",
           "img": "/images/나눔관 2층 A.jpg"
         },
         {
-          "roomName": "2.모임",
+          "roomName": "나눔 주방",
           "roomId": "b-2",
           "img": "/images/나눔관 2층 B.jpg"
         },
         {
-          "roomName": "3.모임",
+          "roomName": "나눔방1",
           "roomId": "b-3",
           "img": "/images/나눔관 2층 C.jpg"
         },
         {
-          "roomName": "4.모임",
+          "roomName": "나눔방2",
           "roomId": "b-4",
           "img": "/images/나눔관 2층 D,E.jpg"
         },
         {
-          "roomName": "5.모임",
+          "roomName": "나눔방3",
           "roomId": "b-5",
           "img": "/images/나눔관 2층 D,E.jpg"
         }
       ]
     },
     {
-      "roomName": "유치부실",
-      "roomId": "f",
-      "img": "/images/sampleImg.png",
-      "groups": [
-        {
-          "roomName": "1.모임",
-          "roomId": "f-1",
-          "img": "/images/sampleImg.png"
-        },
-        {
-          "roomName": "2.모임",
-          "roomId": "f-2",
-          "img": "/images/sampleImg.png"
-        },
-        {
-          "roomName": "3.모임",
-          "roomId": "f-3",
-          "img": "/images/sampleImg.png"
-        }
-      ]
-    },
-    {
-      "roomName": "그레이스홀",
-      "roomId": "m",
-      "img": "/images/sampleImg.png",
-      "groups": [
-        {
-          "roomName": "1.모임",
-          "roomId": "m-1",
-          "img": "/images/sampleImg.png"
-        },
-        {
-          "roomName": "2.모임",
-          "roomId": "m-2",
-          "img": "/images/sampleImg.png"
-        },
-        {
-          "roomName": "3.모임",
-          "roomId": "m-3",
-          "img": "/images/sampleImg.png"
-        }
-      ]
-    },
-    {
       "roomName": "비전홀",
       "roomId": "j",
-      "img": "/images/sampleImg.png",
+      "img": "/images/비전홀.jpg",
       "groups": [
         {
           "roomName": "1.모임",
@@ -136,23 +92,28 @@
       ]
     },
     {
-      "roomName": "영아부실",
-      "roomId": "k",
-      "img": "/images/sampleImg.png",
+      "roomName": "그레이스홀",
+      "roomId": "m",
+      "img": "/images/그레이스홀.jpg",
       "groups": [
         {
           "roomName": "1.모임",
-          "roomId": "k-1",
+          "roomId": "m-1",
           "img": "/images/sampleImg.png"
         },
         {
           "roomName": "2.모임",
-          "roomId": "k-2",
+          "roomId": "m-2",
           "img": "/images/sampleImg.png"
         },
         {
           "roomName": "3.모임",
-          "roomId": "k-3",
+          "roomId": "m-3",
+          "img": "/images/sampleImg.png"
+        },
+        {
+          "roomName": "4.모임",
+          "roomId": "m-4",
           "img": "/images/sampleImg.png"
         }
       ]
@@ -160,7 +121,7 @@
     {
       "roomName": "유년부실",
       "roomId": "l",
-      "img": "/images/sampleImg.png",
+      "img": "/images/유년부실.jpg",
       "groups": [
         {
           "roomName": "1.모임",
@@ -180,50 +141,95 @@
       ]
     },
     {
+      "roomName": "유치부실",
+      "roomId": "f",
+      "img": "/images/유치부실.jpg",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "f-1",
+          "img": "/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "f-2",
+          "img": "/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "f-3",
+          "img": "/images/sampleImg.png"
+        }
+      ]
+    },
+    {
+      "roomName": "영아부실",
+      "roomId": "k",
+      "img": "/images/영아부실.jpg",
+      "groups": [
+        {
+          "roomName": "1.모임",
+          "roomId": "k-1",
+          "img": "/images/sampleImg.png"
+        },
+        {
+          "roomName": "2.모임",
+          "roomId": "k-2",
+          "img": "/images/sampleImg.png"
+        },
+        {
+          "roomName": "3.모임",
+          "roomId": "k-3",
+          "img": "/images/sampleImg.png"
+        }
+      ]
+    },
+
+    {
       "roomName": "지혜실",
       "roomId": "c",
-      "img": "/images/sampleImg.png"
+      "img": "/images/지혜실.jpg"
     },
     {
       "roomName": "모세실",
       "roomId": "d",
-      "img": "/images/sampleImg.png"
+      "img": "/images/모세실.jpg"
     },
     {
       "roomName": "살렘실",
       "roomId": "e",
-      "img": "/images/sampleImg.png"
+      "img": "/images/살렘실.jpg"
     },
 
     {
       "roomName": "지혜의 숲",
       "roomId": "g",
-      "img": "/images/sampleImg.png"
+      "img": "/images/지혜의숲.jpg"
     },
     {
       "roomName": "이룸",
       "roomId": "h",
-      "img": "/images/sampleImg.png"
+      "img": "/images/이룸.jpg"
     },
     {
       "roomName": "자모실",
       "roomId": "i",
-      "img": "/images/sampleImg.png"
+      "img": "/images/자모실.jpg"
     },
     {
       "roomName": "은샘실",
       "roomId": "n",
-      "img": "/images/sampleImg.png"
+      "img": "/images/은샘실.jpg"
     },
     {
       "roomName": "사랑실",
       "roomId": "o",
-      "img": "/images/sampleImg.png"
+      "img": "/images/사랑실.jpg"
     },
     {
       "roomName": "새가족환영실",
       "roomId": "p",
-      "img": "/images/sampleImg.png"
+      "img": "/images/새가족환영실.jpg"
     }
   ]
 }

@@ -97,7 +97,7 @@
 
     .room-img {
       margin-bottom: 5px;
-      height: 150px;
+      height: 100%;
       width: 100%;
       overflow: hidden; /* Ensures image respects border-radius */
 
@@ -239,6 +239,7 @@
       margin-bottom: 10px;
       padding: 8px 12px;
       background: #ffffff;
+      text-align: left;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;

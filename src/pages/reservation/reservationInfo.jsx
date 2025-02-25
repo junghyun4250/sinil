@@ -184,11 +184,11 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
                   onChange={(e) => setSelected(e.target.value)}
                 >
                   <option value="">-- 선택하세요 --</option>
-                  <option value="사역자">사역자</option>
+                  <option value="교역자">교역자</option>
                   <option value="장년부">장년부</option>
-                  <option value="청년부">청년부</option>
+                  <option value="청년국">청년국</option>
                   <option value="청소년부">청소년부</option>
-                  <option value="유초등부">유초등부</option>
+                  <option value="초등부">초등부</option>
                   <option value="유년부">유년부</option>
                   <option value="유치부">유치부</option>
                   <option value="영아부">영아부</option>
