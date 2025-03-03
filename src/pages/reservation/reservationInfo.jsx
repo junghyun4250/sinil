@@ -9,6 +9,8 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
   const { state } = useLocation();
   const { roomData } = state;
 
+  const monthData = useSelector((state) => state.reservation.monthData);
+
   const [selected, setSelected] = useState(""); // 부서 선택
   const [mokjang, setMokjang] = useState(""); // 목장 입력
   const [name, setName] = useState(""); // 예약자 입력
@@ -38,19 +40,49 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
     .toString()
     .padStart(2, "0")}:${currentMinute.toString().padStart(2, "0")}`;
 
-  // 예약 가능한 시간 리스트 (06:00 ~ 23:00)
-  const availableTimes = Array.from({ length: 18 }, (_, i) => {
-    const hour = 6 + i;
-    return `${hour.toString().padStart(2, "0")}:00`;
+  // 예약 가능한 시간 리스트 (09:00 ~ 18:00)
+  const availableTimes = Array.from({ length: 19 }, (_, i) => {
+    const hour = 9 + Math.floor(i / 2);
+    const minutes = i % 2 === 0 ? "00" : "30";
+    return `${hour.toString().padStart(2, "0")}:${minutes}`;
   });
 
   // 오늘 날짜인지 확인
   const isToday = selectedDate === now.toISOString().split("T")[0];
 
-  // 오늘 날짜일 경우 현재 시간 이후의 시간만 필터링
-  const filteredAvailableTimes = isToday
-    ? availableTimes.filter((time) => time >= currentTime)
-    : availableTimes;
+  // 현재 방과 날짜의 기존 예약 필터링
+  const existingReservations = monthData.filter(
+    (reservation) =>
+      reservation.roomCode === roomData.roomId &&
+      reservation.date === selectedDate
+  );
+
+  // 시간을 분으로 변환
+  const timeToMinutes = (timeStr) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    return hours * 60 + minutes;
+  };
+
+  // 예약된 시간 확인
+  const isTimeBooked = (time) => {
+    return existingReservations.some((reservation) => {
+      const resStart = timeToMinutes(reservation.startTime);
+      const resEnd = timeToMinutes(reservation.endTime);
+      const timeMins = timeToMinutes(time);
+      return timeMins >= resStart && timeMins < resEnd;
+    });
+  };
+
+  // 예약 가능 시간 필터링 (기존 예약 제외)
+  const filteredAvailableTimes = availableTimes.filter((time) => {
+    const isAfterCurrent = !isToday || time >= currentTime;
+    return isAfterCurrent && !isTimeBooked(time);
+  });
+
+  // // 오늘 날짜일 경우 현재 시간 이후의 시간만 필터링
+  // const filteredAvailableTimes = isToday
+  //   ? availableTimes.filter((time) => time >= currentTime)
+  //   : availableTimes;
 
   // 종료시간 선택 옵션 (시작시간 이후만 선택 가능)
   const filteredEndTimes = startTime
@@ -89,6 +121,23 @@ const ReservationInfo = ({ selectedDate, setSelectedDate }) => {
     if (!isAgreed) {
       setIsErrorAgreed(true);
       agreeRef.current.focus();
+      return;
+    }
+
+    // 중복 예약 체크
+    const newStartMinutes = timeToMinutes(startTime);
+    const newEndMinutes = timeToMinutes(endTime);
+
+    const isOverlapping = existingReservations.some((reservation) => {
+      const existingStart = timeToMinutes(reservation.startTime);
+      const existingEnd = timeToMinutes(reservation.endTime);
+      return newStartMinutes < existingEnd && newEndMinutes > existingStart;
+    });
+
+    if (isOverlapping) {
+      alert(
+        "선택한 시간대에 이미 예약이 존재합니다. 다른 시간을 선택해주세요."
+      );
       return;
     }
 
