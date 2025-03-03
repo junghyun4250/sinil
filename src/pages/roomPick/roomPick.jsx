@@ -101,7 +101,12 @@ const RoomPick = () => {
                         <span>{group.roomName}</span>
                       </div>
                       <div className="group-buttons">
-                        <button onClick={() => reserveFunc(group)}>
+                        <button
+                          onClick={() => {
+                            dispatch(resetMonthData());
+                            reserveFunc(group);
+                          }}
+                        >
                           예약하기
                         </button>
                         <button
